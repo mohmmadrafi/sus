@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Will You Be My Valentine? 🐧</title>
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(180deg, #cfe9f7, #ffffff);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+      max-width: 360px;
+      position: relative;
+    }
+
+    h1 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 16px;
+      color: #444;
+      margin-bottom: 18px;
+    }
+
+    .penguin {
+      font-size: 64px;
+      margin-bottom: 10px;
+    }
+
+    .buttons {
+      position: relative;
+      height: 80px;
+      margin-top: 10px;
+    }
+
+    button {
+      padding: 10px 18px;
+      font-size: 15px;
+      border-radius: 22px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: absolute;
+      line-height: 1.2;
+      white-space: normal;
+    }
+
+    #yes {
+      background: #ff6f91;
+      color: white;
+      left: 5%;
+    }
+
+    #no {
+      background: #e0e0e0;
+      right: 5%;
+      max-width: 220px;
+    }
+
+    .confetti {
+      position: fixed;
+      top: -10px;
+      font-size: 20px;
+      animation: fall 3s linear forwards;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="card" id="card">
+    <div class="penguin">🐧</div>
+    <h1>Important Penguin Question</h1>
+
+    <p>
+      Penguins travel far,<br>
+      stay loyal for life,<br>
+      and always find their way back 🐧❤️
+    </p>
+
+    <p><strong>Will you be my Valentine?</strong></p>
+
+    <div class="buttons">
+      <button id="yes">YES 💕</button>
+      <button id="no">Mmmmm… let me think 🤔<br>(Yes, but later)</button>
+    </div>
+  </div>
+
+  <script>
+    const noBtn = document.getElementById('no');
+    const yesBtn = document.getElementById('yes');
+    const card = document.getElementById('card');
+
+    let teased = false;
+
+    noBtn.addEventListener('mouseover', () => {
+      if (!teased) {
+        noBtn.innerText = "Penguins don’t hesitate 🐧😉";
+        teased = true;
+      } else {
+        const x = Math.random() * 220 - 110;
+        const y = Math.random() * 120 - 60;
+        noBtn.style.transform = `translate(${x}px, ${y}px)`;
+      }
+    });
+
+    yesBtn.addEventListener('click', () => {
+      card.innerHTML = `
+        <div class="penguin">🐧🐧</div>
+        <h1>YAY!!</h1>
+        <p>
+          One penguin in Germany 🇩🇪<br>
+          One penguin in India 🇮🇳<br><br>
+          Still a pair 🐧❤️
+        </p>
+        <p><strong>You’re officially my Valentine 💕</strong></p>
+      `;
+      launchConfetti();
+    });
+
+    function launchConfetti() {
+      for (let i = 0; i < 30; i++) {
+        const conf = document.createElement('div');
+        conf.classList.add('confetti');
+        conf.innerText = '💖';
+        conf.style.left = Math.random() * 100 + 'vw';
+        conf.style.animationDuration = (Math.random() * 2 + 2) + 's';
+        document.body.appendChild(conf);
+
+        setTimeout(() => conf.remove(), 3000);
+      }
+    }
+  </script>
+</body>
+</html>
